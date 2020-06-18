@@ -1,0 +1,93 @@
+{
+  "id": "1883080",
+  "name": "课设",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5140392",
+      "name": "我的",
+      "font_class": "wode",
+      "unicode": "e631",
+      "unicode_decimal": 58929
+    },
+    {
+      "icon_id": "15002805",
+      "name": "mima",
+      "font_class": "mima",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "4139424",
+      "name": "成绩管理",
+      "font_class": "chengjiguanli",
+      "unicode": "e67e",
+      "unicode_decimal": 59006
+    },
+    {
+      "icon_id": "4311127",
+      "name": "课程管理",
+      "font_class": "kechengguanli",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "5582320",
+      "name": "基本信息",
+      "font_class": "jibenxinxi",
+      "unicode": "e654",
+      "unicode_decimal": 58964
+    },
+    {
+      "icon_id": "7254035",
+      "name": "成绩统计",
+      "font_class": "chengjitongji",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
+      "icon_id": "7384771",
+      "name": "课程管理",
+      "font_class": "kecheng",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "8833682",
+      "name": "学生信息采集",
+      "font_class": "xueshengxinxicaiji",
+      "unicode": "e679",
+      "unicode_decimal": 59001
+    },
+    {
+      "icon_id": "8842748",
+      "name": "排名",
+      "font_class": "paiming",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "10527624",
+      "name": "选课",
+      "font_class": "xuanke",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "14197425",
+      "name": "选课管理-01",
+      "font_class": "xuankeguanli-01",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "14197972",
+      "name": "录入",
+      "font_class": "icon_list_luru",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    }
+  ]
+}
