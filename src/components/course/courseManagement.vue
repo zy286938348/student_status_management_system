@@ -76,13 +76,7 @@ export default {
       // 班级列表信息
       classList: [],
       //   学生信息
-      students: [
-        {
-          stuId: "18130041647",
-          stuName: "张毅",
-          stuPhone: "19834044228"
-        }
-      ],
+      students: [],
       //   学生信息弹出框控制器
       studentDialogVisible: false,
       //   修改班级信息
@@ -103,9 +97,16 @@ export default {
   },
   methods: {
     // 显示班级学生信息
-    showStudentList(classId) {
+    async showStudentList(classId) {
       console.log(classId);
       this.studentDialogVisible = true;
+      const res = await this.$http.get('/student/listByClassId',{
+        params:{
+          classId:classId
+        }
+      })
+      console.log(res.data)
+      this.students = res.data.map.classList
     },
     // 修改班级信息--弹窗
     async changeClass(classId) {

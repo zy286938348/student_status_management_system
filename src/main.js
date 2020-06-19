@@ -14,7 +14,7 @@ import axios from 'axios'
 // 设置请求根路径
 // axios.defaults.baseURL = 'http://10.139.46.13:8080/sms/'
 // axios.defaults.baseURL = 'http://127.0.1:8080/sms/'
-// axios.defaults.baseURL = 'http://10.139.54.135:8080/sms/'
+// axios.defaults.baseURL = 'http://localhost:8080/sms/'
 axios.defaults.baseURL = 'http://39.97.114.115:8080/studentManageSystem/'
 
 // 导入项目中

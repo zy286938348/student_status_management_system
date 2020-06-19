@@ -67,7 +67,7 @@
     >
       <el-form ref="addUser" :model="addUser" label-width="80px">
         <el-form-item label="学号">
-          <el-input v-model="addUser.stuNum"></el-input>
+          <el-input maxlength="10" show-word-limit v-model="addUser.stuNum"></el-input>
         </el-form-item>
         <el-form-item label="姓名">
           <el-input v-model="addUser.stuName"></el-input>
@@ -93,8 +93,8 @@
             <el-option v-for="item in classList" :key="item.Id" :label="item.classId" :value="item.classId"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="电话号码">
-          <el-input v-model="addUser.stuPhone"></el-input>
+        <el-form-item  label="电话号码">
+          <el-input maxlength="11" show-word-limit v-model="addUser.stuPhone"></el-input>
         </el-form-item>
         <el-form-item label="状态">
           <el-select v-model="addUser.stuStatus">
