@@ -33,20 +33,22 @@ export default {
     let data = [];
     
     return {
+      // 科目id
+      courseId:'',
       // 图中数据
       data:[
         { value: 6, name: "不及格率" },
-        { value: 4, name: "及格率" }
+        { value: 3, name: "及格率" }
       ],
       option: {
-        backgroundColor: "#000000",
+        backgroundColor: "white",
 
         title: {
-          text: "Customized Pie",
+          text: "科目及格率",
           left: "center",
           top: 20,
           textStyle: {
-            color: "#ccc"
+            color: "#000000"
           }
         },
 
@@ -71,12 +73,14 @@ export default {
             center: ["50%", "50%"],
             data: [],
             roseType: "radius",
+            // 字的颜色
             label: {
-              color: "rgba(255, 255, 255, 0.3)"
+              color: "rgba(0, 0, 0, 1)"
             },
+            // 线的颜色
             labelLine: {
               lineStyle: {
-                color: "rgba(255, 255, 255, 0.3)"
+                color: "rgba(0, 0, 0, 1)"
               },
               smooth: 0.2,
               length: 10,
@@ -100,7 +104,15 @@ export default {
   },
   methods: {
     // 获取图中数据
-    getData() {
+    async getData() {
+
+      // const res = await this.$http.get('',{
+      //   params:{
+      //     courseId:
+      //   }
+      // })
+
+
       this.option.series[0].data = this.data.sort(function(a, b) {
         return a.value - b.value;
       });

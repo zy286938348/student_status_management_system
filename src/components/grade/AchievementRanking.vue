@@ -27,9 +27,9 @@
           <el-table-column prop="stuNum" label="学号"></el-table-column>
           <el-table-column prop="stuName" label="姓名"></el-table-column>
           <el-table-column prop="stuGradeSum" label="总分">
-            <template slot-scope="props" >
-              <span v-if="props.row.stuGradeSum < 0">未录入成绩</span>
-              <span v-if="props.row.stuGradeSum >= 0" v-text="props.row.stuGradeSum"></span>
+            <template slot-scope="props">
+              <span v-if="props.row.stuGradeSum <= 0">未录入成绩</span>
+              <span v-if="props.row.stuGradeSum > 0" v-text="props.row.stuGradeSum"></span>
             </template>
           </el-table-column>
           <el-table-column prop="address" label="成绩单" width="100">
@@ -42,12 +42,17 @@
     </el-card>
 
     <!-- 成绩单弹出框 -->
-    <el-dialog title="提示" :visible.sync="dialogVisible" width="30%">
-      <span>这是一段信息</span>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-      </span>
+    <el-dialog title="成绩单" :visible.sync="dialogVisible" width="30%">
+      <el-table :data="stuGradeList" style="width: 100%">
+        <el-table-column type="index" label="#"></el-table-column>
+        <el-table-column prop="courseName" label="课程名"></el-table-column>
+        <el-table-column prop="courseGrade" label="成绩">
+          <template slot-scope="props">
+            <span v-if="props.row.courseGrade <= 0">未录入成绩</span>
+            <span v-else-if="props.row.courseGrade > 0" v-text="props.row.courseGrade"></span>
+          </template>
+        </el-table-column>
+      </el-table>
     </el-dialog>
   </div>
 </template>
@@ -57,24 +62,40 @@ export default {
   data() {
     return {
       // 班级初始绑定值
-      classNum: "",
+      classNum: "181300416",
+      // 班级列表
       classNums: [],
       // 表格中的数据
       tableData: [],
+      // 存储学生的成绩列表
+      stuGradeList: [],
       dialogVisible: false
     };
   },
   methods: {
-    isDialogVisible(data) {
+    async isDialogVisible(data) {
       console.log(data);
+
+      const res = await this.$http.get("/grade/person", {
+        params: {
+          stuId: data
+        }
+      });
+
+      this.stuGradeList = res.data.map.list;
+
+      console.log(res.data.map.list);
+
       this.dialogVisible = true;
     },
+    // 获取班级学生信息
     async getUserList() {
       const res = await this.$http.get("/grade/rank/list", {
         params: {
           classId: this.classNum
         }
       });
+      console.log(res.data.map.list);
       if (res.data.code == 200) {
         this.tableData = res.data.map.list;
       }

@@ -7,7 +7,13 @@
     </el-breadcrumb>
     <el-card>
       <el-row>
+        <el-col :span="20">
+
         <el-button @click="addCourse" type="primary">添加课程</el-button>
+        </el-col>
+        <el-col :span="4">
+          <el-button type="warning" icon="el-icon-download" @click="exportToExcel">导出课程信息</el-button>
+        </el-col>
       </el-row>
       <!-- 表格部分 -->
       <el-row>
@@ -193,6 +199,23 @@ export default {
       } else {
         this.$message.error("加载失败");
       }
+    },
+    exportToExcel() {
+      require.ensure([], () => {
+        const { export_json_to_excel } = require("../../excel/Export2Excel");
+        const tHeader = ["课程号", "课程名", "授课教师"];
+        const filterVal = [
+          "courseId",
+          "courseName",
+          "courseTeacher"
+        ];
+        const list = this.courseList;
+        const data = this.formatJson(filterVal, list);
+        export_json_to_excel(tHeader, data, "课程信息");
+      });
+    },
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => v[j]));
     }
   },
   created() {

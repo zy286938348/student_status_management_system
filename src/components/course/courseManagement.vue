@@ -7,7 +7,12 @@
     </el-breadcrumb>
     <el-card>
       <el-row>
-        <el-button type="primary" @click="add">添加班级</el-button>
+        <el-col :span="20">
+          <el-button type="primary" @click="add">添加班级</el-button>
+        </el-col>
+        <el-col :span="4">
+          <el-button type="warning" icon="el-icon-download" @click="exportToExcel">导出班级信息</el-button>
+        </el-col>
       </el-row>
       <el-row>
         <el-table :data="classList" style="width: 100%">
@@ -37,7 +42,7 @@
       </el-table>
     </el-dialog>
     <!-- 修改班级信息 -->
-    <el-dialog title="修改信息" :visible.sync="classDialogVisible" width="30%">
+    <el-dialog title="修改信息" :visible.sync="classDialogVisible" width="15%">
       <el-form :model="classModel">
         <el-form-item>
           <el-input v-model="classModel.classId" disabled></el-input>
@@ -100,13 +105,13 @@ export default {
     async showStudentList(classId) {
       console.log(classId);
       this.studentDialogVisible = true;
-      const res = await this.$http.get('/student/listByClassId',{
-        params:{
-          classId:classId
+      const res = await this.$http.get("/student/listByClassId", {
+        params: {
+          classId: classId
         }
-      })
-      console.log(res.data)
-      this.students = res.data.map.classList
+      });
+      console.log(res.data);
+      this.students = res.data.map.classList;
     },
     // 修改班级信息--弹窗
     async changeClass(classId) {
@@ -128,7 +133,7 @@ export default {
       console.log(res.data);
       this.classDialogVisible = false;
       if (res.data.code == 200) {
-        this.getClassList()
+        this.getClassList();
         this.$message.success("修改成功");
       } else {
         this.$message.success("修改失败");
@@ -162,6 +167,20 @@ export default {
         this.getClassList();
         this.addDlassDialogVisible = false;
       }
+    },
+    // 导出班级信息
+    exportToExcel() {
+      require.ensure([], () => {
+        const { export_json_to_excel } = require("../../excel/Export2Excel");
+        const tHeader = ["班号", "班主任姓名"];
+        const filterVal = ["classId", "classTeacher"];
+        const list = this.classList;
+        const data = this.formatJson(filterVal, list);
+        export_json_to_excel(tHeader, data, "班级信息");
+      });
+    },
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => v[j]));
     }
   },
   created() {

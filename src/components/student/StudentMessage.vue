@@ -9,7 +9,12 @@
 
     <el-card shadow="always">
       <el-row>
-        <el-button type="primary" @click="addStudent">添加学生信息</el-button>
+        <el-col :span="20">
+          <el-button type="primary" @click="addStudent">添加学生信息</el-button>
+        </el-col>
+        <el-col :span="4">
+          <el-button type="warning" icon="el-icon-download" @click="exportToExcel">导出学生信息</el-button>
+        </el-col>
       </el-row>
       <el-row>
         <el-table :data="tableData" style="width: 100%">
@@ -90,10 +95,15 @@
         </el-form-item>
         <el-form-item label="班级">
           <el-select v-model="addUser.stuClass" placeholder="请选择班级">
-            <el-option v-for="item in classList" :key="item.Id" :label="item.classId" :value="item.classId"></el-option>
+            <el-option
+              v-for="item in classList"
+              :key="item.Id"
+              :label="item.classId"
+              :value="item.classId"
+            ></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item  label="电话号码">
+        <el-form-item label="电话号码">
           <el-input maxlength="11" show-word-limit v-model="addUser.stuPhone"></el-input>
         </el-form-item>
         <el-form-item label="状态">
@@ -190,9 +200,9 @@ export default {
     // 班级列表
     async getClassList() {
       const res = await this.$http.get("/class/list", {});
-      console.log(res.data)
-      if(res.data.code == 200){
-        this.classList = res.data.map.list
+      console.log(res.data);
+      if (res.data.code == 200) {
+        this.classList = res.data.map.list;
       }
     },
     // 获取学生列表
@@ -244,7 +254,7 @@ export default {
     },
     // 弹出添加学生对话框
     addStudent() {
-      this.getClassList()
+      this.getClassList();
       this.dialogVisible = true;
     },
     // 添加学生信息
@@ -299,6 +309,26 @@ export default {
         this.drawer = false;
         this.$message.error("修改失败");
       }
+    },
+    exportToExcel() {
+      require.ensure([], () => {
+        const { export_json_to_excel } = require("../../excel/Export2Excel");
+        const tHeader = ["学号", "姓名", "性别", "入学时间", "班级", "电话"];
+        const filterVal = [
+          "stuNum",
+          "stuName",
+          "stuGender",
+          "stuDate",
+          "stuClass",
+          "stuPhone"
+        ];
+        const list = this.tableData;
+        const data = this.formatJson(filterVal, list);
+        export_json_to_excel(tHeader, data, "学生信息");
+      });
+    },
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => v[j]));
     }
   },
   created() {
