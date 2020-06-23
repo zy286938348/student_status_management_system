@@ -47,14 +47,15 @@ const routes = [{
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  mode:'history'
 })
 
 // 挂载导航守卫
 router.beforeEach((to, from, next) => {
   const tokenStr = window.sessionStorage.getItem('token')
   if (to.path === '/') {
-    if (tokenStr != "")
+    if (tokenStr != null& tokenStr != "")
       return next("/welcome")
     else
       return next()

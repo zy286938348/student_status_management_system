@@ -67,7 +67,7 @@ export default {
         console.log(ret);
         if (ret.data.code == 200) {
           this.$message.success("登录成功");
-          window.sessionStorage.setItem("token", ret.data.token);
+          window.sessionStorage.setItem("token", "login");
           this.$router.push("/home");
         }
       });
