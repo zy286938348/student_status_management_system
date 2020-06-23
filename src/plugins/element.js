@@ -28,7 +28,9 @@ import {
   Dialog,
   DatePicker,
   Tabs,
-  TabPane
+  TabPane,
+  Carousel,
+  CarouselItem
 } from 'element-ui'
 
 Vue.use(Button)
@@ -58,6 +60,8 @@ Vue.use(Dialog)
 Vue.use(DatePicker)
 Vue.use(Tabs)
 Vue.use(TabPane)
+Vue.use(Carousel)
+Vue.use(CarouselItem)
 
 // 弹框组件的全局搭载
 Vue.prototype.$message = Message

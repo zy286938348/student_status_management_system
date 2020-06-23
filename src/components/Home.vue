@@ -5,7 +5,7 @@
         <!-- <img src="../assets/logo.png" alt=""> -->
         <span>学生学籍管理系统</span>
       </div>
-      <el-button type="info">退出</el-button>
+      <el-button type="info" @click="loginOut">退出</el-button>
     </el-header>
     <el-container>
       <el-aside width="200px">
@@ -29,14 +29,6 @@
                 <span>基本情况</span>
               </template>
             </el-menu-item>
-            <el-menu-item index="/messageManagement" @click="saveNavState('/messageManagement')">
-              <template slot="title">
-                <!-- 图标 -->
-                <i class="el-icon-menu"></i>
-                <!-- 文本 -->
-                <span>信息管理</span>
-              </template>
-            </el-menu-item>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
@@ -57,17 +49,6 @@
               <i class="iconfont icon-chengjiguanli"></i>
               <span slot="title">成绩管理</span>
             </template>
-            <el-menu-item
-              index="/achievementStatistics"
-              @click="saveNavState('/achievementStatistics')"
-            >
-              <template slot="title">
-                <!-- 图标 -->
-                <i class="iconfont icon-chengjitongji"></i>
-                <!-- 文本 -->
-                <span>成绩统计</span>
-              </template>
-            </el-menu-item>
             <el-menu-item index="/achievementRanking" @click="saveNavState('/achievementRanking')">
               <template slot="title">
                 <!-- 图标 -->
@@ -101,10 +82,7 @@
                 <span>班级选课</span>
               </template>
             </el-menu-item>
-            <el-menu-item
-              index="/courseManagement"
-              @click="saveNavState('/courseManagement')"
-            >
+            <el-menu-item index="/courseManagement" @click="saveNavState('/courseManagement')">
               <template slot="title">
                 <!-- 图标 -->
                 <i class="iconfont icon-xueshengxinxicaiji"></i>
@@ -134,6 +112,11 @@ export default {
     saveNavState(activePath) {
       window.sessionStorage.setItem("activePath", activePath);
       this.activePath = activePath;
+    },
+    loginOut() {
+      window.sessionStorage.setItem("activePath", "");
+      window.sessionStorage.setItem("token", "");
+      this.$router.push("/");
     }
   },
   created() {

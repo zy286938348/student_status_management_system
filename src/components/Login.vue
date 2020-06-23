@@ -66,15 +66,8 @@ export default {
         var ret = await this.$http.post("/login", qs.stringify(this.loginForm));
         console.log(ret);
         if (ret.data.code == 200) {
-          // if(ret.data.token != null){
-              this.$message.success('登录成功')
-          //     // 登陆成功后将token保存到客户端的sessionStorage中
-          //     window.sessionStorage.setItem("token",ret.data.token)
-          //     // 通过编程式导航跳转到后台主页，路由地址是/home
-          //     this.$router.push('/home');
-          // }else{
-          //     this.$message.error('登录失败')
-          // }
+          this.$message.success("登录成功");
+          window.sessionStorage.setItem("token", ret.data.token);
           this.$router.push("/home");
         }
       });
