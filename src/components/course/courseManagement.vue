@@ -33,10 +33,10 @@
       </el-row>
     </el-card>
 
-    <!-- 学生成绩单弹出框 -->
+    <!-- 学生信息弹出框 -->
     <el-dialog title="学生信息" :visible.sync="studentDialogVisible" width="40%" :show-close="false">
       <el-table :data="students">
-        <el-table-column prop="stuId" label="学号"></el-table-column>
+        <el-table-column prop="stuNum" label="学号"></el-table-column>
         <el-table-column prop="stuName" label="姓名"></el-table-column>
         <el-table-column prop="stuPhone" label="电话"></el-table-column>
       </el-table>
